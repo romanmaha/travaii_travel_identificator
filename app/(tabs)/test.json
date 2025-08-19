@@ -1,0 +1,386 @@
+[
+  {
+    "identifier": "com.apple.voice.compact.ar-001.Maged",
+    "language": "ar-001",
+    "name": "Majed",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.bg-BG.Daria",
+    "language": "bg-BG",
+    "name": "Daria",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.ca-ES.Montserrat",
+    "language": "ca-ES",
+    "name": "Montse",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.cs-CZ.Zuzana",
+    "language": "cs-CZ",
+    "name": "Zuzana",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.da-DK.Sara",
+    "language": "da-DK",
+    "name": "Sara",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.de-DE.Anna",
+    "language": "de-DE",
+    "name": "Anna",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.el-GR.Melina",
+    "language": "el-GR",
+    "name": "Melina",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.en-AU.Karen",
+    "language": "en-AU",
+    "name": "Karen",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.en-GB.Daniel",
+    "language": "en-GB",
+    "name": "Daniel",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.en-IE.Moira",
+    "language": "en-IE",
+    "name": "Moira",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.en-IN.Rishi",
+    "language": "en-IN",
+    "name": "Rishi",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.Trinoids",
+    "language": "en-US",
+    "name": "Trinoids",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.Albert",
+    "language": "en-US",
+    "name": "Albert",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.Hysterical",
+    "language": "en-US",
+    "name": "Jester",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.en-US.Samantha",
+    "language": "en-US",
+    "name": "Samantha",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.Whisper",
+    "language": "en-US",
+    "name": "Whisper",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.Princess",
+    "language": "en-US",
+    "name": "Superstar",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.Bells",
+    "language": "en-US",
+    "name": "Bells",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.Organ",
+    "language": "en-US",
+    "name": "Organ",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.BadNews",
+    "language": "en-US",
+    "name": "Bad News",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.Bubbles",
+    "language": "en-US",
+    "name": "Bubbles",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.Junior",
+    "language": "en-US",
+    "name": "Junior",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.Bahh",
+    "language": "en-US",
+    "name": "Bahh",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.Deranged",
+    "language": "en-US",
+    "name": "Wobble",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.Boing",
+    "language": "en-US",
+    "name": "Boing",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.GoodNews",
+    "language": "en-US",
+    "name": "Good News",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.Zarvox",
+    "language": "en-US",
+    "name": "Zarvox",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.Ralph",
+    "language": "en-US",
+    "name": "Ralph",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.Cellos",
+    "language": "en-US",
+    "name": "Cellos",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.Kathy",
+    "language": "en-US",
+    "name": "Kathy",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.speech.synthesis.voice.Fred",
+    "language": "en-US",
+    "name": "Fred",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.en-ZA.Tessa",
+    "language": "en-ZA",
+    "name": "Tessa",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.es-ES.Monica",
+    "language": "es-ES",
+    "name": "Mónica",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.es-MX.Paulina",
+    "language": "es-MX",
+    "name": "Paulina",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.fi-FI.Satu",
+    "language": "fi-FI",
+    "name": "Satu",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.fr-CA.Amelie",
+    "language": "fr-CA",
+    "name": "Amélie",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.fr-FR.Thomas",
+    "language": "fr-FR",
+    "name": "Thomas",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.he-IL.Carmit",
+    "language": "he-IL",
+    "name": "Carmit",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.hi-IN.Lekha",
+    "language": "hi-IN",
+    "name": "Lekha",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.hr-HR.Lana",
+    "language": "hr-HR",
+    "name": "Lana",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.hu-HU.Mariska",
+    "language": "hu-HU",
+    "name": "Tünde",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.id-ID.Damayanti",
+    "language": "id-ID",
+    "name": "Damayanti",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.it-IT.Alice",
+    "language": "it-IT",
+    "name": "Alice",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.ja-JP.Kyoko",
+    "language": "ja-JP",
+    "name": "Kyoko",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.ko-KR.Yuna",
+    "language": "ko-KR",
+    "name": "Yuna",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.ms-MY.Amira",
+    "language": "ms-MY",
+    "name": "Amira",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.nb-NO.Nora",
+    "language": "nb-NO",
+    "name": "Nora",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.nl-BE.Ellen",
+    "language": "nl-BE",
+    "name": "Ellen",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.nl-NL.Xander",
+    "language": "nl-NL",
+    "name": "Xander",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.pl-PL.Zosia",
+    "language": "pl-PL",
+    "name": "Zosia",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.pt-BR.Luciana",
+    "language": "pt-BR",
+    "name": "Luciana",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.pt-PT.Joana",
+    "language": "pt-PT",
+    "name": "Joana",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.ro-RO.Ioana",
+    "language": "ro-RO",
+    "name": "Ioana",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.ru-RU.Milena",
+    "language": "ru-RU",
+    "name": "Milena",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.sk-SK.Laura",
+    "language": "sk-SK",
+    "name": "Laura",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.sl-SI.Tina",
+    "language": "sl-SI",
+    "name": "Tina",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.sv-SE.Alva",
+    "language": "sv-SE",
+    "name": "Alva",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.th-TH.Kanya",
+    "language": "th-TH",
+    "name": "Kanya",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.tr-TR.Yelda",
+    "language": "tr-TR",
+    "name": "Yelda",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.uk-UA.Lesya",
+    "language": "uk-UA",
+    "name": "Lesya",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.vi-VN.Linh",
+    "language": "vi-VN",
+    "name": "Linh",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.zh-CN.Tingting",
+    "language": "zh-CN",
+    "name": "Tingting",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.zh-HK.Sinji",
+    "language": "zh-HK",
+    "name": "Sinji",
+    "quality": "Default"
+  },
+  {
+    "identifier": "com.apple.voice.compact.zh-TW.Meijia",
+    "language": "zh-TW",
+    "name": "Meijia",
+    "quality": "Default"
+  }
+]
