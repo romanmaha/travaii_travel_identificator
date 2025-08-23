@@ -86,5 +86,41 @@
   "alert_remove_error_message": "Не вдалося видалити запис.",
   "alert_saved_success_title": "Збережено!",
   "alert_saved_success_message": "Дані про розпізнавання збережено у вашу історію.",
-  "alert_save_error_message": "Не вдалося зберегти дані."
+  "alert_save_error_message": "Не вдалося зберегти дані.",
+  "alert_remove_title": "Видалити з історії",
+  "alert_remove_message": "Ви впевнені, що хочете видалити цей елемент з історії?",
+  "button_cancel": "Скасувати",
+  "button_remove": "Видалити",
+  "alert_removed_success_title": "Видалено",
+  "alert_removed_success_message": "Елемент було видалено з вашої історії.",
+  "alert_error_title": "Помилка",
+  "alert_remove_error_message": "Не вдалося видалити елемент.",
+  "alert_saved_success_title": "Збережено!",
+  "alert_saved_success_message": "Цю ідентифікацію збережено в історії.",
+  "alert_save_error_message": "Не вдалося зберегти ідентифікацію.",
+  "speech_about_title": "Про {{title}}.",
+  "speech_interesting_facts": "Цікаві факти.",
+  "settings_title": "Налаштування",
+
+  "preferences": "НАЛАШТУВАННЯ",
+  "snap_tips_subtitle": "Показувати поради для найкращого результату",
+  "language": "Мова",
+  "language_subtitle": "Система (Українська)",
+
+  "feedback": "ВІДГУК",
+  "rate_us": "Оцініть нас",
+  "suggest_feature": "Запропонувати функцію",
+
+  "storage": "СХОВИЩЕ",
+  "clear_cache": "Очистити кеш",
+
+  "legal": "ПРАВОВЕ",
+  "privacy_policy": "Політика конфіденційності",
+  "terms_of_use": "Умови користування",
+
+  "get_premium": "Отримати Premium",
+
+  "clear_cache_alert_title": "Очистити кеш",
+  "clear_cache_alert_message": "Ви впевнені, що хочете очистити кеш застосунку?",
+  "button_clear": "Очистити"
 }

@@ -74,5 +74,41 @@
   "style_suggestion_5": "Este estilo ainda é usado hoje?",
   "chat_initial_greeting": "Olá! Posso ajudá-lo a aprender sobre estilos arquitetônicos e edifícios. O que gostaria de saber?",
   "chat_error_message": "Desculpe, ocorreu um erro. Por favor, tente novamente.",
-  "chat_placeholder": "Pergunte qualquer coisa..."
+  "chat_placeholder": "Pergunte qualquer coisa...",
+  "alert_remove_title": "Remover do histórico",
+  "alert_remove_message": "Tem certeza de que deseja remover este item do seu histórico?",
+  "button_cancel": "Cancelar",
+  "button_remove": "Remover",
+  "alert_removed_success_title": "Removido",
+  "alert_removed_success_message": "Este item foi removido do seu histórico.",
+  "alert_error_title": "Erro",
+  "alert_remove_error_message": "Não foi possível remover o item.",
+  "alert_saved_success_title": "Salvo!",
+  "alert_saved_success_message": "Esta identificação foi salva no seu histórico.",
+  "alert_save_error_message": "Não foi possível salvar a identificação.",
+  "speech_about_title": "Sobre {{title}}.",
+  "speech_interesting_facts": "Fatos interessantes.",
+  "settings_title": "Configurações",
+
+  "preferences": "PREFERÊNCIAS",
+  "snap_tips_subtitle": "Mostrar dicas rápidas para melhores resultados",
+  "language": "Idioma",
+  "language_subtitle": "Sistema (Português)",
+
+  "feedback": "FEEDBACK",
+  "rate_us": "Avalie-nos",
+  "suggest_feature": "Sugerir recurso",
+
+  "storage": "ARMAZENAMENTO",
+  "clear_cache": "Limpar cache",
+
+  "legal": "LEGAL",
+  "privacy_policy": "Política de privacidade",
+  "terms_of_use": "Termos de uso",
+
+  "get_premium": "Obter Premium",
+
+  "clear_cache_alert_title": "Limpar cache",
+  "clear_cache_alert_message": "Tem certeza de que deseja limpar o cache do aplicativo?",
+  "button_clear": "Limpar"
 }

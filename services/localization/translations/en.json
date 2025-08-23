@@ -89,5 +89,28 @@
   "alert_saved_success_message": "This identification has been saved to your history.",
   "alert_save_error_message": "Could not save the identification.",
   "speech_about_title": "About {{title}}.",
-  "speech_interesting_facts": "Interesting Facts."
+  "speech_interesting_facts": "Interesting Facts.",
+  "settings_title": "Settings",
+
+  "preferences": "PREFERENCES",
+  "snap_tips_subtitle": "Show quick tips for best results",
+  "language": "Language",
+  "language_subtitle": "System (English)",
+
+  "feedback": "FEEDBACK",
+  "rate_us": "Rate Us",
+  "suggest_feature": "Suggest Feature",
+
+  "storage": "STORAGE",
+  "clear_cache": "Clear Cache",
+
+  "legal": "LEGAL",
+  "privacy_policy": "Privacy Policy",
+  "terms_of_use": "Terms of Use",
+
+  "get_premium": "Get Premium",
+
+  "clear_cache_alert_title": "Clear Cache",
+  "clear_cache_alert_message": "Are you sure you want to clear the application cache?",
+  "button_clear": "Clear"
 }

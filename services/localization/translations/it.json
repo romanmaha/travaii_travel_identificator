@@ -74,5 +74,41 @@
   "style_suggestion_5": "Questo stile è ancora usato oggi?",
   "chat_initial_greeting": "Ciao! Posso aiutarti a conoscere gli stili architettonici e gli edifici. Cosa vorresti sapere?",
   "chat_error_message": "Spiacente, si è verificato un errore. Riprova.",
-  "chat_placeholder": "Chiedi qualsiasi cosa..."
+  "chat_placeholder": "Chiedi qualsiasi cosa...",
+  "alert_remove_title": "Rimuovi dalla cronologia",
+  "alert_remove_message": "Sei sicuro di voler rimuovere questo elemento dalla cronologia?",
+  "button_cancel": "Annulla",
+  "button_remove": "Rimuovi",
+  "alert_removed_success_title": "Rimosso",
+  "alert_removed_success_message": "Questo elemento è stato rimosso dalla cronologia.",
+  "alert_error_title": "Errore",
+  "alert_remove_error_message": "Impossibile rimuovere l’elemento.",
+  "alert_saved_success_title": "Salvato!",
+  "alert_saved_success_message": "Questa identificazione è stata salvata nella cronologia.",
+  "alert_save_error_message": "Impossibile salvare l’identificazione.",
+  "speech_about_title": "Informazioni su {{title}}.",
+  "speech_interesting_facts": "Fatti interessanti.",
+  "settings_title": "Impostazioni",
+
+  "preferences": "PREFERENZE",
+  "snap_tips_subtitle": "Mostra suggerimenti rapidi per risultati migliori",
+  "language": "Lingua",
+  "language_subtitle": "Sistema (Italiano)",
+
+  "feedback": "FEEDBACK",
+  "rate_us": "Valutaci",
+  "suggest_feature": "Suggerisci una funzione",
+
+  "storage": "ARCHIVIAZIONE",
+  "clear_cache": "Cancella cache",
+
+  "legal": "LEGALE",
+  "privacy_policy": "Informativa sulla privacy",
+  "terms_of_use": "Termini di utilizzo",
+
+  "get_premium": "Ottieni Premium",
+
+  "clear_cache_alert_title": "Cancella cache",
+  "clear_cache_alert_message": "Vuoi davvero cancellare la cache dell’applicazione?",
+  "button_clear": "Cancella"
 }

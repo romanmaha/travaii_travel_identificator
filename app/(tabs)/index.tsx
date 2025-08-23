@@ -15,6 +15,12 @@ import {
 // Імпортуємо дані для популярних стилів
 import { Colors } from "@/constants/Colors"; // Імпортуємо ваші кольори
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  BannerAd,
+  BannerAdSize,
+  TestIds,
+  useInterstitialAd,
+} from "react-native-google-mobile-ads";
 
 // Типізація для елементів з JSON (добра практика)
 type StyleItem = {
@@ -60,16 +66,38 @@ type HistoryItem = {
 const StyleCard = React.memo(({ item }: { item: StyleItem }) => {
   const router = useRouter();
 
+  const { isLoaded, isClosed, load, show } = useInterstitialAd(
+    TestIds.INTERSTITIAL,
+    {
+      requestNonPersonalizedAdsOnly: true,
+    }
+  );
+
+  useEffect(() => {
+    load();
+  }, [load, isClosed]);
+
   return (
     <TouchableOpacity
       onPress={() => {
-        router.push({
-          pathname: "/details/[id]",
-          params: {
-            id: item.id,
-            styleData: JSON.stringify(item),
-          },
-        });
+        if (isLoaded) {
+          show();
+          router.push({
+            pathname: "/details/[id]",
+            params: {
+              id: item.id,
+              styleData: JSON.stringify(item),
+            },
+          });
+        } else {
+          router.push({
+            pathname: "/details/[id]",
+            params: {
+              id: item.id,
+              styleData: JSON.stringify(item),
+            },
+          });
+        }
       }}>
       <View style={styles.styleCard}>
         <Image source={{ uri: item.preview }} style={styles.styleCardImage} />
@@ -78,9 +106,8 @@ const StyleCard = React.memo(({ item }: { item: StyleItem }) => {
     </TouchableOpacity>
   );
 });
-
 const HomeScreen = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const router = useRouter();
   // === СТАН (STATE) ===
   const [locationText, setLocationText] = useState("Loading location...");
@@ -88,24 +115,56 @@ const HomeScreen = () => {
   const [scanningHistory, setScanningHistory] = useState<HistoryItem[]>([]);
   const [stylesData, setStylesData] = useState<StyleItem[] | null>(null);
   const [loadingStyles, setLoadingStyles] = useState(true);
+  const { isLoaded, isClosed, load, show } = useInterstitialAd(
+    TestIds.INTERSTITIAL
+  );
+
+  useEffect(() => {
+    // Start loading the interstitial straight away
+    load();
+  }, [load, isClosed]);
   // ✅ 3. Використовуємо useFocusEffect для завантаження історії
   useEffect(() => {
     const fetchStyles = async () => {
+      // ✅ 2. Визначаємо мову та базовий URL
+      const langCode = i18n.language.split("-")[0]; // Отримуємо 'uk' з 'uk-UA'
+      const baseUrl =
+        "https://archai.darkcraft.space/architectural_styles_full";
+
+      const primaryUrl = `${baseUrl}_${langCode}.json`; // напр., ..._uk.json
+      const fallbackUrl = `${baseUrl}_en.json`; // Завжди маємо запасний варіант
+
       try {
-        const response = await fetch(
-          "https://archai.darkcraft.space/architectural_styles_full.json"
-        );
-        const json = await response.json();
-        setStylesData(json);
+        setLoadingStyles(true);
+        let finalData;
+
+        // ✅ 3. Спочатку намагаємось завантажити файл для поточної мови
+        const response = await fetch(primaryUrl);
+
+        if (response.ok) {
+          // Якщо файл знайдено і все добре
+          finalData = await response.json();
+        } else {
+          // Якщо файл не знайдено (помилка 404) або інша помилка,
+          // пробуємо завантажити англійську версію
+          console.warn(
+            `Style file for '${langCode}' not found. Falling back to English.`
+          );
+          const fallbackResponse = await fetch(fallbackUrl);
+          finalData = await fallbackResponse.json();
+        }
+
+        setStylesData(finalData);
       } catch (error) {
         console.error("Failed to fetch architectural styles:", error);
+        // Можна спробувати завантажити англійську версію і тут, на випадок збою мережі
       } finally {
         setLoadingStyles(false);
       }
     };
 
     fetchStyles();
-  }, []);
+  }, [i18n.language]);
 
   useFocusEffect(
     useCallback(() => {
@@ -255,6 +314,15 @@ const HomeScreen = () => {
           />
         )}
       </ScrollView>
+      <BannerAd
+        unitId={TestIds.BANNER} // Замініть на ваш реальний ID рекламного блоку
+        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+        requestOptions={{
+          networkExtras: {
+            collapsible: "bottom",
+          },
+        }}
+      />
     </SafeAreaView>
   );
 };

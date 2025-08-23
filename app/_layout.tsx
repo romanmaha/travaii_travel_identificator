@@ -1,3 +1,6 @@
+import { PremiumProvider } from "@/context/PremiumContext";
+import { useColorScheme } from "@/hooks/useColorScheme";
+import i18n from "@/services/localization/i18n";
 import {
   DarkTheme,
   DefaultTheme,
@@ -6,15 +9,29 @@ import {
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
+import { useEffect } from "react";
+import { I18nextProvider } from "react-i18next";
+import mobileAds from "react-native-google-mobile-ads";
 import "react-native-reanimated";
 
-import { I18nextProvider } from "react-i18next";
-
-import { PremiumProvider } from "@/context/PremiumContext";
-import { useColorScheme } from "@/hooks/useColorScheme";
-import i18n from "@/services/localization/i18n";
-
 export default function RootLayout() {
+  useEffect(() => {
+    const initializeApp = async () => {
+      try {
+        // Спочатку запитуємо дозвіл на відстеження (покаже pop-up на iOS)
+        await requestTrackingPermissionsAsync();
+
+        // Потім ініціалізуємо рекламний SDK
+        const adapterStatuses = await mobileAds().initialize();
+        console.log("Mobile Ads Initialized:", adapterStatuses);
+      } catch (error) {
+        console.error("Failed to initialize app:", error);
+      }
+    };
+
+    initializeApp();
+  }, []);
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),

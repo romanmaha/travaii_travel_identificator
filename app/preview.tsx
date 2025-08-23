@@ -4,9 +4,10 @@ import { usePremium } from "@/context/PremiumContext"; // ✅ 1. Імпорту�
 import { getAnalyzeImagePrompt } from "@/helpers/analyzeImageWithGeminiPrompt";
 import * as FileSystem from "expo-file-system";
 import * as ImageManipulator from "expo-image-manipulator"; // ✅ 1. Імпортуємо маніпулятор
+import * as Location from "expo-location";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ActivityIndicator,
@@ -27,6 +28,23 @@ export default function PreviewScreen() {
   const { uri } = useLocalSearchParams<{ uri: string }>();
   const { decrementScans } = usePremium(); // ✅ 2. Отримуємо функцію
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [location, setLocation] = useState<Location.LocationObject | null>(
+    null
+  );
+  useEffect(() => {
+    async function getCurrentLocation() {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        console.log("Location permission not granted");
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    }
+    console.log(location);
+    getCurrentLocation();
+  }, []);
 
   if (!uri) {
     router.back();
@@ -53,7 +71,16 @@ export default function PreviewScreen() {
         }
       );
       const currentLanguage = i18n.language; // Наприклад, "es", "de", "fr"
-      const dynamicPrompt = getAnalyzeImagePrompt(currentLanguage);
+      const locationParam = location
+        ? {
+            latitude: location.coords.latitude.toString(),
+            longitude: location.coords.longitude.toString(),
+          }
+        : undefined;
+      const dynamicPrompt = getAnalyzeImagePrompt(
+        currentLanguage,
+        locationParam
+      );
       const requestBody = {
         contents: [
           {

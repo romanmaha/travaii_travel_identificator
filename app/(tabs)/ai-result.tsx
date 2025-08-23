@@ -424,7 +424,7 @@ const styles = StyleSheet.create({
   },
   safeArea: { flex: 1, backgroundColor: "#F4F7F6" },
   contentContainer: { padding: 20 },
-  heroImage: { width: "100%", height: 300 },
+  heroImage: { width: "100%", height: 250, resizeMode: "cover" },
   headerSection: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -458,7 +458,7 @@ const styles = StyleSheet.create({
   actionsRow: {
     flexDirection: "row",
     justifyContent: "space-around",
-    marginBottom: 24,
+    marginBottom: 10,
     backgroundColor: "white",
     paddingVertical: 16,
     borderRadius: 16,
@@ -492,7 +492,8 @@ const styles = StyleSheet.create({
   infoLabel: {
     fontSize: 16,
     color: "#666666",
-    marginRight: 10, // ✅ Додаємо відступ
+    marginRight: 10,
+    marginLeft: 10, // ✅ Додаємо відступ
   },
   infoValue: {
     flex: 1, // ✅ Дозволяє тексту зайняти вільний простір і переноситись

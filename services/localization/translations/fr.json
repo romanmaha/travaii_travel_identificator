@@ -74,5 +74,41 @@
   "style_suggestion_5": "Ce style est-il encore utilisé aujourd’hui ?",
   "chat_initial_greeting": "Bonjour ! Je peux vous aider à en apprendre davantage sur les styles architecturaux et les bâtiments. Que voulez-vous savoir ?",
   "chat_error_message": "Désolé, une erreur est survenue. Veuillez réessayer.",
-  "chat_placeholder": "Demandez ce que vous voulez..."
+  "chat_placeholder": "Demandez ce que vous voulez...",
+  "alert_remove_title": "Supprimer de l’historique",
+  "alert_remove_message": "Voulez-vous vraiment supprimer cet élément de votre historique ?",
+  "button_cancel": "Annuler",
+  "button_remove": "Supprimer",
+  "alert_removed_success_title": "Supprimé",
+  "alert_removed_success_message": "Cet élément a été supprimé de votre historique.",
+  "alert_error_title": "Erreur",
+  "alert_remove_error_message": "Impossible de supprimer l’élément.",
+  "alert_saved_success_title": "Enregistré !",
+  "alert_saved_success_message": "Cette identification a été enregistrée dans votre historique.",
+  "alert_save_error_message": "Impossible d’enregistrer l’identification.",
+  "speech_about_title": "À propos de {{title}}.",
+  "speech_interesting_facts": "Faits intéressants.",
+  "settings_title": "Paramètres",
+
+  "preferences": "PRÉFÉRENCES",
+  "snap_tips_subtitle": "Afficher des astuces rapides pour de meilleurs résultats",
+  "language": "Langue",
+  "language_subtitle": "Système (Français)",
+
+  "feedback": "COMMENTAIRES",
+  "rate_us": "Évaluez-nous",
+  "suggest_feature": "Suggérer une fonctionnalité",
+
+  "storage": "STOCKAGE",
+  "clear_cache": "Vider le cache",
+
+  "legal": "LÉGAL",
+  "privacy_policy": "Politique de confidentialité",
+  "terms_of_use": "Conditions d’utilisation",
+
+  "get_premium": "Obtenir Premium",
+
+  "clear_cache_alert_title": "Vider le cache",
+  "clear_cache_alert_message": "Voulez-vous vraiment vider le cache de l’application ?",
+  "button_clear": "Vider"
 }
