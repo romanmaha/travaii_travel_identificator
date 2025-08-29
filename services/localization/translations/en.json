@@ -93,7 +93,7 @@
   "settings_title": "Settings",
 
   "preferences": "PREFERENCES",
-  "snap_tips_subtitle": "Show quick tips for best results",
+
   "language": "Language",
   "language_subtitle": "System (English)",
 
@@ -112,5 +112,17 @@
 
   "clear_cache_alert_title": "Clear Cache",
   "clear_cache_alert_message": "Are you sure you want to clear the application cache?",
-  "button_clear": "Clear"
+  "button_clear": "Clear",
+  "premium_activated": "Premium Activated",
+  "snap_tips_subtitle": "Quick tips for best results",
+  "cache_cleared_successfully": "Cache cleared successfully.",
+  "loading_location": "Loading location...",
+  "location_not_found": "Location not found",
+  "permission_denied": "Permission to access location was denied",
+  "loading_styles": "  Loading styles...",
+  "choose_language": "Choose language",
+  "error_could_not_load_landmark_data": "Error: Could not load landmark data",
+  "identification_failed_title": "Could Not Identify",
+  "identification_failed_message": "This doesn't seem to be a landmark or a place of interest. Please try another photo.",
+  "success": "Success"
 }

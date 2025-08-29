@@ -6,66 +6,74 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import Purchases, { CustomerInfo } from "react-native-purchases";
+
+// Ключ для твого Entitlement в RevenueCat
+const ENTITLEMENT_ID = "premium"; // ⚠️ ЗАМІНИ на свій ID з дашборду RevenueCat
 
 const SCANS_KEY = "user_scans_left";
-const PREMIUM_KEY = "user_is_premium";
 
-// Інтерфейс для нашого контексту
 interface PremiumContextType {
   isPremium: boolean;
   scansLeft: number;
-  togglePremium: () => void;
   decrementScans: () => void;
   isLoading: boolean;
+  customerInfo: CustomerInfo | null;
 }
 
-// Створюємо контекст з початковим значенням undefined
 const PremiumContext = createContext<PremiumContextType | undefined>(undefined);
 
-// Створюємо провайдер
 export const PremiumProvider = ({ children }: { children: ReactNode }) => {
-  const [isPremium, setIsPremium] = useState(true);
+  const [isPremium, setIsPremium] = useState(false); // Початково - не преміум
   const [scansLeft, setScansLeft] = useState(3);
   const [isLoading, setIsLoading] = useState(true);
+  const [customerInfo, setCustomerInfo] = useState<CustomerInfo | null>(null);
 
-  // Завантажуємо дані при першому запуску
   useEffect(() => {
-    const loadState = async () => {
+    const loadScansFromStorage = async () => {
       try {
         const scansStr = await AsyncStorage.getItem(SCANS_KEY);
-        const premiumStr = await AsyncStorage.getItem(PREMIUM_KEY);
-
         if (scansStr !== null) {
           setScansLeft(JSON.parse(scansStr));
         }
-        if (premiumStr !== null) {
-          setIsPremium(JSON.parse(premiumStr));
-        }
       } catch (e) {
-        console.error("Failed to load premium state from storage", e);
-      } finally {
-        setIsLoading(false);
+        console.error("Failed to load scans from storage", e);
       }
     };
 
-    loadState();
-  }, []);
+    loadScansFromStorage();
 
-  // Функція для перемикання преміум-статусу
-  const togglePremium = async () => {
-    const newValue = !isPremium;
-    setIsPremium(newValue);
-    try {
-      await AsyncStorage.setItem(PREMIUM_KEY, JSON.stringify(newValue));
-      // Якщо користувач стає преміум, скидаємо лічильник сканів (опціонально)
-      if (newValue) {
-        setScansLeft(3); // або якесь інше значення
-        await AsyncStorage.setItem(SCANS_KEY, JSON.stringify(3));
+    const customerInfoUpdateHandler = (info: CustomerInfo) => {
+      setCustomerInfo(info);
+
+      // Перевіряємо, чи є у користувача активний Entitlement
+      const userIsPremium =
+        typeof info.entitlements.active[ENTITLEMENT_ID] !== "undefined";
+
+      setIsPremium(userIsPremium);
+      setIsLoading(false);
+    };
+
+    // Додаємо слухача для оновлення інформації про користувача
+    Purchases.addCustomerInfoUpdateListener(customerInfoUpdateHandler);
+
+    // Отримуємо початкову інформацію
+    const getInitialCustomerInfo = async () => {
+      try {
+        const info = await Purchases.getCustomerInfo();
+        customerInfoUpdateHandler(info);
+      } catch (e) {
+        console.error("Failed to get initial customer info", e);
+        setIsLoading(false);
       }
-    } catch (e) {
-      console.error("Failed to save premium state", e);
-    }
-  };
+    };
+    getInitialCustomerInfo();
+
+    // Не забудь відписатись від слухача при розмонтуванні компонента
+    return () => {
+      Purchases.removeCustomerInfoUpdateListener(customerInfoUpdateHandler);
+    };
+  }, []);
 
   // Функція для зменшення кількості сканів
   const decrementScans = async () => {
@@ -85,16 +93,16 @@ export const PremiumProvider = ({ children }: { children: ReactNode }) => {
       value={{
         isPremium,
         scansLeft,
-        togglePremium,
         decrementScans,
         isLoading,
+        customerInfo,
       }}>
       {children}
     </PremiumContext.Provider>
   );
 };
 
-// Створюємо кастомний хук для зручного доступу до контексту
+// Хук залишається без змін
 export const usePremium = () => {
   const context = useContext(PremiumContext);
   if (context === undefined) {

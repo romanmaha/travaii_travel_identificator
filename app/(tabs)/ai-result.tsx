@@ -1,5 +1,6 @@
 import { Colors } from "@/constants/Colors";
 import { usePremium } from "@/context/PremiumContext"; // ✅ 1. Імпортуємо хук
+import { usePaywall } from "@/hooks/usePaywall";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as FileSystem from "expo-file-system";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
@@ -18,6 +19,11 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import {
+  BannerAd,
+  BannerAdSize,
+  TestIds,
+} from "react-native-google-mobile-ads";
 
 // Тип для даних, що приходять від Gemini
 type LandmarkData = {
@@ -74,6 +80,25 @@ const ActionButton = ({
 export default function AiResultScreen() {
   const { t, i18n } = useTranslation();
   const { isPremium } = usePremium(); // ✅ 2. Отримуємо статус преміум
+  const { presentPaywall } = usePaywall();
+  const handleGetPremium = () => {
+    // ✅ Передаємо іншу логіку навігації
+    presentPaywall({
+      onSuccess: (customerInfo) => {
+        console.log(
+          "Settings: Покупка успішна!",
+          customerInfo.entitlements.active
+        );
+        // Наприклад, показуємо сповіщення
+
+        // Навігацію не робимо, залишаємось тут
+      },
+      onDismiss: () => {
+        console.log("Settings: Paywall закрито, залишаємось на екрані.");
+        // Нічого не робимо
+      },
+    });
+  };
   const { data: dataString, confidence } = useLocalSearchParams<{
     data: string;
     confidence?: string;
@@ -148,7 +173,7 @@ export default function AiResultScreen() {
   if (!landmarkData) {
     return (
       <SafeAreaView style={styles.container}>
-        <Text>Error: Could not load landmark data.</Text>
+        <Text>{t("error_could_not_load_landmark_data")}</Text>
       </SafeAreaView>
     );
   }
@@ -325,10 +350,7 @@ export default function AiResultScreen() {
             <ActionButton
               onPress={() => {
                 if (!isPremium) {
-                  Alert.alert(
-                    "Premium Feature",
-                    "Upgrade to Premium to use Listen feature."
-                  );
+                  handleGetPremium();
                   return;
                 }
                 handleListen();
@@ -356,10 +378,7 @@ export default function AiResultScreen() {
               label={t("ask_ai_guide")}
               onPress={() => {
                 if (!isPremium) {
-                  Alert.alert(
-                    "Premium Feature",
-                    "Upgrade to Premium to use the AI Chat."
-                  );
+                  handleGetPremium();
                   return;
                 }
                 router.push({
@@ -382,6 +401,24 @@ export default function AiResultScreen() {
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>{t("about")}</Text>
             <Text style={styles.aboutText}>{displayData.about}</Text>
+            {!isPremium && (
+              <View
+                style={{
+                  marginTop: 20,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}>
+                <BannerAd
+                  unitId={TestIds.BANNER} // Замініть на ваш реальний ID рекламного блоку
+                  size={BannerAdSize.INLINE_ADAPTIVE_BANNER}
+                  requestOptions={{
+                    networkExtras: {
+                      collapsible: "bottom",
+                    },
+                  }}
+                />
+              </View>
+            )}
           </View>
 
           {displayData.quote && (

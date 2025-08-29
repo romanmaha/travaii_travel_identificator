@@ -39,6 +39,7 @@ export default function TabLayout() {
         name="scan" // Файл scan.tsx
         options={{
           title: t("scan"),
+
           tabBarStyle: { display: "none" },
           tabBarIcon: ({ color }) => (
             // Іконка сканера. 'camera.viewfinder' - хороший варіант з SF Symbols

@@ -19,6 +19,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { TestIds, useInterstitialAd } from "react-native-google-mobile-ads";
 
 const MAX_RETRIES = 3;
 
@@ -31,6 +32,13 @@ export default function PreviewScreen() {
   const [location, setLocation] = useState<Location.LocationObject | null>(
     null
   );
+  const [landmarkResult, setLandmarkResult] = useState<any | null>(null);
+  const { isLoaded, isClosed, load, show } = useInterstitialAd(
+    TestIds.INTERSTITIAL
+  );
+  useEffect(() => {
+    load();
+  }, [load]);
   useEffect(() => {
     async function getCurrentLocation() {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -45,7 +53,37 @@ export default function PreviewScreen() {
     console.log(location);
     getCurrentLocation();
   }, []);
+  const navigateToResult = (data: any) => {
+    decrementScans();
+    router.replace({
+      pathname: `/ai-result`,
+      params: {
+        data: JSON.stringify(data),
+        confidence: data.confidence?.toString() || "N/A",
+      },
+    });
+  };
 
+  // ✅ Цей ефект спрацює, коли ми отримаємо результат аналізу
+  useEffect(() => {
+    if (landmarkResult) {
+      // Якщо результат є, перевіряємо, чи завантажена реклама
+      if (isLoaded) {
+        show(); // Показуємо рекламу
+      } else {
+        // Якщо реклама не завантажилась, переходимо одразу
+        navigateToResult(landmarkResult);
+      }
+    }
+  }, [landmarkResult, isLoaded]);
+
+  // ✅ Цей ефект спрацює, коли користувач закриє рекламу
+  useEffect(() => {
+    if (isClosed && landmarkResult) {
+      // Якщо рекламу було закрито і в нас є результат для переходу
+      navigateToResult(landmarkResult);
+    }
+  }, [isClosed, landmarkResult]);
   if (!uri) {
     router.back();
     return null;
@@ -56,6 +94,9 @@ export default function PreviewScreen() {
 
   const analyzeImageWithGemini = async () => {
     setIsAnalyzing(true);
+    if (isLoaded && isAnalyzing) {
+      show();
+    }
     try {
       // ✅ 2. Стискаємо зображення перед відправкою
       const manipulatedImage = await ImageManipulator.manipulateAsync(
@@ -135,30 +176,43 @@ export default function PreviewScreen() {
       ) {
         const jsonString = responseData.candidates[0].content.parts[0].text;
         const landmarkData = JSON.parse(jsonString);
+        const confidenceThreshold = 30; // Встановіть поріг впевненості (напр., 30%)
 
+        if (
+          landmarkData.objectType === "Other" ||
+          landmarkData.confidence < confidenceThreshold
+        ) {
+          // Якщо AI вважає, що це "Інше" АБО впевненість занадто низька
+          setIsAnalyzing(false); // Зупиняємо індикатор завантаження
+          Alert.alert(
+            t("identification_failed_title"),
+            t("identification_failed_message")
+          );
+          return; // Зупиняємо виконання функції і не переходимо далі
+        }
         console.log("Gemini full response object:", landmarkData);
         landmarkData.heroImage = uri;
 
         decrementScans(); // ✅ 3. Зменшуємо лічильник сканів
-
-        router.replace({
-          pathname: `/ai-result`,
-          params: {
-            data: JSON.stringify(landmarkData),
-            confidence: landmarkData.confidence?.toString() || "N/A",
-          },
-        });
+        setLandmarkResult(landmarkData);
+        // router.replace({
+        //   pathname: `/ai-result`,
+        //   params: {
+        //     data: JSON.stringify(landmarkData),
+        //     confidence: landmarkData.confidence?.toString() || "N/A",
+        //   },
+        // });
       } else {
         console.error("Invalid response from Gemini:", responseData);
         const errorMessage =
           responseData?.error?.message ||
           "Could not get a valid response from the AI model. Please try again.";
         Alert.alert("Analysis Failed", errorMessage);
+        setIsAnalyzing(false);
       }
     } catch (error) {
       console.error("Error analyzing image:", error);
       Alert.alert("Error", "An error occurred while analyzing the image.");
-    } finally {
       setIsAnalyzing(false);
     }
   };

@@ -1,3 +1,4 @@
+import { usePaywall } from "@/hooks/usePaywall";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import * as ImageManipulator from "expo-image-manipulator";
 import * as ImagePicker from "expo-image-picker";
@@ -26,7 +27,7 @@ const VIEWFINDER_HEIGHT = screenHeight * 0.55;
 export default function ScanScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-
+  const { presentPaywall } = usePaywall();
   const { isPremium, scansLeft, isLoading } = usePremium(); // ✅ 2. Отримуємо дані з контексту
   const [permission, requestPermission] = useCameraPermissions();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -37,16 +38,13 @@ export default function ScanScreen() {
   const pickImage = async () => {
     // ✅ 2. Перевіряємо ліміт сканувань
     if (!isPremium && scansLeft <= 0) {
-      Alert.alert(
-        "No Scans Left",
-        "You have used all your free scans. Upgrade to Premium for unlimited scans."
-      );
+      handleGetPremium();
       return;
     }
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ["images", "videos"],
+      mediaTypes: ["images"],
       allowsEditing: true,
-      aspect: [3, 4],
+      aspect: [4, 3],
       quality: 1,
     });
 
@@ -64,10 +62,7 @@ export default function ScanScreen() {
     if (cameraRef.current && !isProcessing) {
       // ✅ 3. Перевіряємо ліміт сканувань
       if (!isPremium && scansLeft <= 0) {
-        Alert.alert(
-          "No Scans Left",
-          "You have used all your free scans. Upgrade to Premium for unlimited scans."
-        );
+        handleGetPremium();
         return;
       }
 
@@ -79,10 +74,9 @@ export default function ScanScreen() {
         if (photo) {
           // ✅ 3. Логіка обрізання зображення
           // Розраховуємо коефіцієнти для перетворення екранних координат у координати зображення
-          const widthRatio = photo.width / screenWidth;
-          const heightRatio = photo.height / screenHeight;
 
-          // Розраховуємо прямокутник для обрізання
+          const widthRatio = photo.width / screenWidth;
+          const heightRatio = photo.height / screenHeight; // Розраховуємо прямокутник для обрізання
           const cropData = {
             originX: ((screenWidth - VIEWFINDER_WIDTH) / 2) * widthRatio,
             originY: ((screenHeight - VIEWFINDER_HEIGHT) / 2) * heightRatio,
@@ -135,7 +129,24 @@ export default function ScanScreen() {
       </View>
     );
   }
+  const handleGetPremium = () => {
+    // ✅ Передаємо іншу логіку навігації
+    presentPaywall({
+      onSuccess: (customerInfo) => {
+        console.log(
+          "Settings: Покупка успішна!",
+          customerInfo.entitlements.active
+        );
+        // Наприклад, показуємо сповіщення
 
+        // Навігацію не робимо, залишаємось тут
+      },
+      onDismiss: () => {
+        console.log("Settings: Paywall закрито, залишаємось на екрані.");
+        // Нічого не робимо
+      },
+    });
+  };
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -157,7 +168,9 @@ export default function ScanScreen() {
 
         {!isPremium && (
           <View style={styles.topContent}>
-            <TouchableOpacity style={styles.unlockButton}>
+            <TouchableOpacity
+              style={styles.unlockButton}
+              onPress={handleGetPremium}>
               <Text style={styles.unlockButtonText}>
                 ✨ {t("unlock_unlimeted_scans")}
               </Text>

@@ -91,7 +91,7 @@
   "settings_title": "Configuración",
 
   "preferences": "PREFERENCIAS",
-  "snap_tips_subtitle": "Mostrar consejos rápidos para mejores resultados",
+
   "language": "Idioma",
   "language_subtitle": "Sistema (Español)",
 
@@ -110,5 +110,17 @@
 
   "clear_cache_alert_title": "Borrar caché",
   "clear_cache_alert_message": "¿Seguro que quieres borrar la caché de la aplicación?",
-  "button_clear": "Borrar"
+  "button_clear": "Borrar",
+  "premium_activated": "Premium activado",
+  "snap_tips_subtitle": "Consejos rápidos para mejores resultados",
+  "cache_cleared_successfully": "Caché borrada con éxito.",
+  "loading_location": "Cargando ubicación...",
+  "location_not_found": "Ubicación no encontrada",
+  "permission_denied": "Permiso para acceder a la ubicación denegado",
+  "loading_styles": "Cargando estilos...",
+  "choose_language": "Elegir idioma",
+  "error_could_not_load_landmark_data": "Error: no se pudieron cargar los datos del monumento",
+  "identification_failed_title": "No se pudo identificar",
+  "identification_failed_message": "Esto no parece ser un monumento o un lugar de interés. Intenta con otra foto.",
+  "success": "Completado con éxito"
 }

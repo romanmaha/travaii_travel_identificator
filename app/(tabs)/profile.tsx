@@ -1,9 +1,16 @@
-import { Stack } from "expo-router";
-import React from "react";
+import LanguageModal from "@/components/ui/LanguageModal";
+import SnapTipsModal from "@/components/ui/SnapTipsModal";
+import { usePremium } from "@/context/PremiumContext";
+import { usePaywall } from "@/hooks/usePaywall";
+import { LANGS, LANGUAGE_STORAGE_KEY } from "@/services/localization/languages";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Stack, useRouter } from "expo-router";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Alert,
   Image,
+  Linking,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -56,27 +63,88 @@ const SettingsSection = ({ title, children }: SettingsSectionProps) => (
 
 // --- Main Settings Screen Component ---
 export default function profile() {
-  const { t } = useTranslation();
+  const router = useRouter();
+  const [isTipsModalVisible, setTipsModalVisible] = useState(false);
+  const { presentPaywall } = usePaywall();
+  const { t, i18n } = useTranslation();
+  const { isPremium } = usePremium();
+  const [currentLang, setCurrentLang] = useState(i18n.language);
+  const [isLangModalVisible, setLangModalVisible] = useState(false);
+  useEffect(() => {
+    const handler = (lng: string) => setCurrentLang(lng);
+    i18n.on("languageChanged", handler);
+    return () => {
+      i18n.off("languageChanged", handler);
+    };
+  }, []);
+
+  const currentNativeName =
+    LANGS.find((l) => l.code === currentLang)?.native ?? currentLang;
+  const handleSelectLanguage = async (code: string) => {
+    try {
+      await i18n.changeLanguage(code);
+      await AsyncStorage.setItem(LANGUAGE_STORAGE_KEY, code);
+      setLangModalVisible(false);
+    } catch (e) {
+      console.error("Failed to switch language:", e);
+      Alert.alert("Error", "Failed to change language");
+    }
+  };
 
   // --- Placeholder Handlers ---
-  const handleSnapTips = () => console.log("Navigate to Snap Tips");
-  const handleLanguage = () => console.log("Navigate to Language Settings");
+  const handleSnapTips = () => setTipsModalVisible(true);
+  const handleLanguage = () => setLangModalVisible(true);
   const handleRateUs = () => console.log("Open App Store for rating");
-  const handleSuggestFeature = () => console.log("Open email client");
+  const handleSuggestFeature = () => {
+    const email = "support@travaii.com";
+    const subject = "Suggest a Feature for Travaii";
+    const url = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+    Linking.openURL(url).catch((err) =>
+      console.error("An error occurred", err)
+    );
+  };
+
   const handleClearCache = () => {
     Alert.alert(t("clear_cache_alert_title"), t("clear_cache_alert_message"), [
       { text: t("button_cancel"), style: "cancel" },
       {
         text: t("button_clear"),
         style: "destructive",
-        onPress: () => console.log("Cache cleared"),
+        onPress: async () => {
+          try {
+            await AsyncStorage.clear();
+            Alert.alert(t("success"), t("cache_cleared_successfully"));
+            console.log("AsyncStorage cleared successfully.");
+          } catch (e) {
+            console.error("Failed to clear the async storage.", e);
+            Alert.alert(t("error"), t("failed_to_clear_cache"));
+          }
+        },
       },
     ]);
   };
-  const handlePrivacyPolicy = () => console.log("Navigate to Privacy Policy");
-  const handleTermsOfUse = () => console.log("Navigate to Terms of Use");
-  const handleGetPremium = () => console.log("Navigate to Premium Screen");
+  const handlePrivacyPolicy = () =>
+    Linking.openURL("https://archai.darkcraft.space/privacy-policy.html");
+  const handleTermsOfUse = () =>
+    Linking.openURL("https://archai.darkcraft.space/terms-of-use.html");
+  const handleGetPremium = () => {
+    // ✅ Передаємо іншу логіку навігації
+    presentPaywall({
+      onSuccess: (customerInfo) => {
+        console.log(
+          "Settings: Покупка успішна!",
+          customerInfo.entitlements.active
+        );
+        // Наприклад, показуємо сповіщення
 
+        // Навігацію не робимо, залишаємось тут
+      },
+      onDismiss: () => {
+        console.log("Settings: Paywall закрито, залишаємось на екрані.");
+        // Нічого не робимо
+      },
+    });
+  };
   return (
     <SafeAreaView style={styles.safeArea}>
       <Stack.Screen
@@ -101,11 +169,11 @@ export default function profile() {
         </SettingsSection>
 
         <SettingsSection title={t("feedback")}>
-          <SettingsRow
+          {/* <SettingsRow
             icon={require("../../assets/icons/star.png")}
             title={t("rate_us")}
             onPress={handleRateUs}
-          />
+          /> */}
           <SettingsRow
             icon={require("../../assets/icons/mail.png")}
             title={t("suggest_feature")}
@@ -134,14 +202,27 @@ export default function profile() {
           />
         </SettingsSection>
 
-        <TouchableOpacity
-          style={styles.premiumButton}
-          onPress={handleGetPremium}>
-          <Text style={styles.premiumButtonText}>{t("get_premium")}</Text>
-        </TouchableOpacity>
+        {!isPremium && (
+          <TouchableOpacity
+            style={styles.premiumButton}
+            onPress={handleGetPremium}>
+            <Text style={styles.premiumButtonText}>{t("get_premium")}</Text>
+          </TouchableOpacity>
+        )}
 
         <Text style={styles.versionText}>Version 1.0.0 (100)</Text>
       </ScrollView>
+      <SnapTipsModal
+        visible={isTipsModalVisible}
+        onClose={() => setTipsModalVisible(false)}
+      />
+      <LanguageModal
+        visible={isLangModalVisible}
+        onClose={() => setLangModalVisible(false)}
+        onSelect={handleSelectLanguage}
+        currentLang={currentLang}
+        title={t("choose_language") ?? "Choose language"}
+      />
     </SafeAreaView>
   );
 }

@@ -110,5 +110,16 @@
 
   "clear_cache_alert_title": "Vider le cache",
   "clear_cache_alert_message": "Voulez-vous vraiment vider le cache de l’application ?",
-  "button_clear": "Vider"
+  "button_clear": "Vider",
+  "premium_activated": "Premium activé",
+  "cache_cleared_successfully": "Cache effacé avec succès.",
+  "loading_location": "Chargement de la localisation...",
+  "location_not_found": "Localisation introuvable",
+  "permission_denied": "Permission d'accéder à la localisation refusée",
+  "loading_styles": "Chargement des styles...",
+  "choose_language": "Choisir la langue",
+  "error_could_not_load_landmark_data": "Erreur : impossible de charger les données du monument",
+  "identification_failed_title": "Impossible d’identifier",
+  "identification_failed_message": "Cela ne semble pas être un monument ou un lieu d’intérêt. Veuillez essayer une autre photo.",
+  "success": "Réussi"
 }

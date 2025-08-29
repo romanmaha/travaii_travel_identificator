@@ -1,4 +1,6 @@
 import { Colors } from "@/constants/Colors";
+import { usePremium } from "@/context/PremiumContext";
+import { usePaywall } from "@/hooks/usePaywall";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -23,6 +25,8 @@ const featureIcons = [
 const StyleDetailScreen = () => {
   const { t } = useTranslation();
   const router = useRouter();
+  const { presentPaywall } = usePaywall();
+  const { isPremium } = usePremium();
   const { styleData, confidence } = useLocalSearchParams<{
     styleData: string;
     confidence?: string;
@@ -71,6 +75,10 @@ const StyleDetailScreen = () => {
   const { data } = styleInfo;
 
   const handleAskArchAI = () => {
+    if (!isPremium) {
+      presentPaywall();
+      return;
+    }
     const chatContextData = {
       title: data.styleHeader,
       style: styleInfo.name,

@@ -14,6 +14,7 @@ import {
 } from "react-native";
 // Імпортуємо дані для популярних стилів
 import { Colors } from "@/constants/Colors"; // Імпортуємо ваші кольори
+import { usePremium } from "@/context/PremiumContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   BannerAd,
@@ -65,7 +66,6 @@ type HistoryItem = {
 
 const StyleCard = React.memo(({ item }: { item: StyleItem }) => {
   const router = useRouter();
-
   const { isLoaded, isClosed, load, show } = useInterstitialAd(
     TestIds.INTERSTITIAL,
     {
@@ -73,32 +73,50 @@ const StyleCard = React.memo(({ item }: { item: StyleItem }) => {
     }
   );
 
+  // ✅ 1. Створюємо стан для відкладеної навігації
+  const [navigateTo, setNavigateTo] = useState<StyleItem | null>(null);
+
+  // Завантажуємо рекламу при монтуванні або після її закриття
   useEffect(() => {
     load();
   }, [load, isClosed]);
 
+  // ✅ 2. Створюємо ефект, який спрацює ПІСЛЯ закриття реклами
+  useEffect(() => {
+    // Якщо рекламу було закрито І ми маємо куди переходити
+    if (isClosed && navigateTo) {
+      router.push({
+        pathname: "/details/[id]",
+        params: {
+          id: navigateTo.id,
+          styleData: JSON.stringify(navigateTo),
+        },
+      });
+      // Важливо: скидаємо стан, щоб уникнути повторної навігації
+      setNavigateTo(null);
+    }
+  }, [isClosed, navigateTo, router]);
+
+  const handlePress = () => {
+    if (isLoaded) {
+      // ✅ 3. НЕ переходимо одразу. Замість цього, зберігаємо дані
+      //    для майбутнього переходу і показуємо рекламу.
+      setNavigateTo(item);
+      show();
+    } else {
+      // Якщо реклама не завантажена, переходимо одразу
+      router.push({
+        pathname: "/details/[id]",
+        params: {
+          id: item.id,
+          styleData: JSON.stringify(item),
+        },
+      });
+    }
+  };
+
   return (
-    <TouchableOpacity
-      onPress={() => {
-        if (isLoaded) {
-          show();
-          router.push({
-            pathname: "/details/[id]",
-            params: {
-              id: item.id,
-              styleData: JSON.stringify(item),
-            },
-          });
-        } else {
-          router.push({
-            pathname: "/details/[id]",
-            params: {
-              id: item.id,
-              styleData: JSON.stringify(item),
-            },
-          });
-        }
-      }}>
+    <TouchableOpacity onPress={handlePress}>
       <View style={styles.styleCard}>
         <Image source={{ uri: item.preview }} style={styles.styleCardImage} />
         <Text style={styles.styleCardText}>{item.name}</Text>
@@ -110,20 +128,13 @@ const HomeScreen = () => {
   const { t, i18n } = useTranslation();
   const router = useRouter();
   // === СТАН (STATE) ===
-  const [locationText, setLocationText] = useState("Loading location...");
+  const [locationText, setLocationText] = useState(t("loading_location"));
   // Починаємо з порожнього масиву для історії
   const [scanningHistory, setScanningHistory] = useState<HistoryItem[]>([]);
   const [stylesData, setStylesData] = useState<StyleItem[] | null>(null);
   const [loadingStyles, setLoadingStyles] = useState(true);
-  const { isLoaded, isClosed, load, show } = useInterstitialAd(
-    TestIds.INTERSTITIAL
-  );
+  const { isPremium } = usePremium();
 
-  useEffect(() => {
-    // Start loading the interstitial straight away
-    load();
-  }, [load, isClosed]);
-  // ✅ 3. Використовуємо useFocusEffect для завантаження історії
   useEffect(() => {
     const fetchStyles = async () => {
       // ✅ 2. Визначаємо мову та базовий URL
@@ -198,7 +209,7 @@ const HomeScreen = () => {
       // Запитуємо дозвіл на використання геолокації
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
-        setLocationText("Permission to access location was denied");
+        setLocationText(t("permission_denied"));
         return;
       }
 
@@ -211,7 +222,7 @@ const HomeScreen = () => {
         const { city, country } = address[0];
         setLocationText(`${city}, ${country}`);
       } else {
-        setLocationText("Location not found");
+        setLocationText(t("location_not_found"));
       }
     })();
   }, []);
@@ -260,7 +271,7 @@ const HomeScreen = () => {
           <Text style={styles.sectionTitle}>{t("popular_styles")}</Text>
           {loadingStyles ? (
             <Text style={{ marginLeft: 20, color: "#888" }}>
-              Loading styles...
+              {t("loading_styles")}
             </Text>
           ) : (
             <FlatList
@@ -314,15 +325,17 @@ const HomeScreen = () => {
           />
         )}
       </ScrollView>
-      <BannerAd
-        unitId={TestIds.BANNER} // Замініть на ваш реальний ID рекламного блоку
-        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
-        requestOptions={{
-          networkExtras: {
-            collapsible: "bottom",
-          },
-        }}
-      />
+      {!isPremium && (
+        <BannerAd
+          unitId={TestIds.BANNER} // Замініть на ваш реальний ID рекламного блоку
+          size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+          requestOptions={{
+            networkExtras: {
+              collapsible: "bottom",
+            },
+          }}
+        />
+      )}
     </SafeAreaView>
   );
 };

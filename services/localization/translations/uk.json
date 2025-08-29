@@ -30,7 +30,7 @@
   "onboarding_slide_1_description": "Фотографуйте або завантажуйте фото, щоб точно ідентифікувати будівлі та архітектурні стилі.",
   "onboarding_slide_2_title1": "Дізнавайтесь",
   "onboarding_slide_2_title2": "Що ви бачите",
-  "onboarding_slide_2_description": "Читайте або слухайте детальну інформацію про стилі, історію та культурні факти на основі ШІ.",
+  "onboarding_slide_2_description": "Читайте або слухайте детальну інформацію про стилі, історію на основі ШІ.",
   "onboarding_slide_3_title1": "Спілкуйтеся з",
   "onboarding_slide_3_title2": "Вашим ШІ-гідом",
   "onboarding_slide_3_description": "Від стилів до історій — ваш ШІ-гід знає відповіді.",
@@ -77,17 +77,6 @@
   "chat_error_message": "Вибачте, сталася помилка. Будь ласка, спробуйте ще раз.",
   "chat_placeholder": "Запитайте будь-що...",
   "alert_remove_title": "Видалити з історії",
-  "alert_remove_message": "Ви впевнені, що хочете видалити цей запис з вашої історії?",
-  "button_cancel": "Скасувати",
-  "button_remove": "Видалити",
-  "alert_removed_success_title": "Видалено",
-  "alert_removed_success_message": "Цей запис було видалено з вашої історії.",
-  "alert_error_title": "Помилка",
-  "alert_remove_error_message": "Не вдалося видалити запис.",
-  "alert_saved_success_title": "Збережено!",
-  "alert_saved_success_message": "Дані про розпізнавання збережено у вашу історію.",
-  "alert_save_error_message": "Не вдалося зберегти дані.",
-  "alert_remove_title": "Видалити з історії",
   "alert_remove_message": "Ви впевнені, що хочете видалити цей елемент з історії?",
   "button_cancel": "Скасувати",
   "button_remove": "Видалити",
@@ -103,7 +92,6 @@
   "settings_title": "Налаштування",
 
   "preferences": "НАЛАШТУВАННЯ",
-  "snap_tips_subtitle": "Показувати поради для найкращого результату",
   "language": "Мова",
   "language_subtitle": "Система (Українська)",
 
@@ -122,5 +110,17 @@
 
   "clear_cache_alert_title": "Очистити кеш",
   "clear_cache_alert_message": "Ви впевнені, що хочете очистити кеш застосунку?",
-  "button_clear": "Очистити"
+  "button_clear": "Очистити",
+  "premium_activated": "Преміум активовано",
+  "snap_tips_subtitle": "Швидкі поради для найкращого результату",
+  "cache_cleared_successfully": "Кеш успішно очищено.",
+  "loading_location": "Завантаження локації...",
+  "location_not_found": "Локацію не знайдено",
+  "permission_denied": "Доступ до локації заборонено",
+  "loading_styles": "Завантаження стилів...",
+  "choose_language": "Виберіть мову",
+  "error_could_not_load_landmark_data": "Помилка: Не вдалося завантажити дані про пам’ятку",
+  "identification_failed_title": "Не вдалося ідентифікувати",
+  "identification_failed_message": "Схоже, що це не пам’ятка чи цікаве місце. Спробуйте інше фото.",
+  "success": "Успішно"
 }

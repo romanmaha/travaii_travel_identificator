@@ -1,7 +1,6 @@
 import { GOOGLE_GEMINI_API_KEY } from "@/constants";
 import { Colors } from "@/constants/Colors";
 import FormattedMessage from "@/helpers/formattedMessage";
-import * as Location from "expo-location";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -31,6 +30,7 @@ type LandmarkData = {
   title: string;
   style: string;
   heroImage?: string;
+  location?: string;
 };
 
 const LANDMARK_SUGGESTION_KEYS = [
@@ -67,7 +67,6 @@ export default function ChatScreen() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [userLocation, setUserLocation] = useState<string | null>(null);
   const flatListRef = useRef<FlatList>(null);
 
   // Парсимо дані про пам'ятку
@@ -79,20 +78,6 @@ export default function ChatScreen() {
       return null;
     }
   }, [dataString]);
-
-  // Отримуємо локацію користувача
-  useEffect(() => {
-    (async () => {
-      const { status } = await Location.getForegroundPermissionsAsync();
-      if (status === "granted") {
-        const location = await Location.getCurrentPositionAsync({});
-        const address = await Location.reverseGeocodeAsync(location.coords);
-        if (address[0]) {
-          setUserLocation(`${address[0].city}, ${address[0].country}`);
-        }
-      }
-    })();
-  }, []);
 
   // Встановлюємо початкове повідомлення від AI
   useEffect(() => {
@@ -145,7 +130,13 @@ export default function ChatScreen() {
       }));
 
       // ✅ 3. Спрощений промпт для уникнення зайвих привітань
-      const prompt = `You are AI Guide, a helpful travel assistant. We are discussing "${landmarkData.title}".
+      const prompt = `You are AI Guide, a helpful travel assistant. We are discussing the landmark "${
+        landmarkData.title
+      }"${
+        landmarkData.location
+          ? `, which is located in ${landmarkData.location}`
+          : ""
+      }.
       Answer the following question concisely and in a friendly tone, directly addressing the user's query.
       IMPORTANT: Your entire response MUST be in the following language: **${currentLanguage}**.`;
 

@@ -91,7 +91,6 @@
   "settings_title": "Configurações",
 
   "preferences": "PREFERÊNCIAS",
-  "snap_tips_subtitle": "Mostrar dicas rápidas para melhores resultados",
   "language": "Idioma",
   "language_subtitle": "Sistema (Português)",
 
@@ -110,5 +109,17 @@
 
   "clear_cache_alert_title": "Limpar cache",
   "clear_cache_alert_message": "Tem certeza de que deseja limpar o cache do aplicativo?",
-  "button_clear": "Limpar"
+  "button_clear": "Limpar",
+  "premium_activated": "Premium ativado",
+  "snap_tips_subtitle": "Dicas rápidas para melhores resultados",
+  "cache_cleared_successfully": "Cache limpa com sucesso.",
+  "loading_location": "Carregando localização...",
+  "location_not_found": "Localização não encontrada",
+  "permission_denied": "Permissão para acessar a localização foi negada",
+  "loading_styles": "Carregando estilos...",
+  "choose_language": "Escolher idioma",
+  "error_could_not_load_landmark_data": "Erro: não foi possível carregar os dados do marco",
+  "identification_failed_title": "Não foi possível identificar",
+  "identification_failed_message": "Isto não parece ser um marco ou um local de interesse. Tente outra foto.",
+  "success": "Concluído com sucesso"
 }

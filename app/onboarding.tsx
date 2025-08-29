@@ -1,4 +1,6 @@
 import { Colors } from "@/constants/Colors";
+import { usePremium } from "@/context/PremiumContext";
+import { usePaywall } from "@/hooks/usePaywall";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import React, { useRef, useState } from "react";
@@ -15,7 +17,6 @@ import {
   ViewToken,
 } from "react-native";
 const { width } = Dimensions.get("window");
-
 // Дані для кожного кроку онбордингу
 const onboardingData = [
   {
@@ -40,12 +41,13 @@ const onboardingData = [
     descriptionKey: "onboarding_slide_3_description",
   },
 ];
-
 const OnboardingScreen = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
   const slidesRef = useRef<FlatList>(null);
+  const { presentPaywall } = usePaywall();
+  const { isPremium } = usePremium();
 
   // Функція для оновлення індексу активного слайда
   const onViewableItemsChanged = useRef(
@@ -65,10 +67,23 @@ const OnboardingScreen = () => {
     if (currentIndex < onboardingData.length - 1) {
       slidesRef.current?.scrollToIndex({ index: currentIndex + 1 });
     } else {
+      if (isPremium) {
+        router.replace("/(tabs)");
+        return;
+      } // Якщо дані ще завантажуються, нічого не робимо
       try {
         await AsyncStorage.setItem("hasCompletedOnboarding", "true");
-        // Переходимо на головний екран
-        router.replace("/(tabs)");
+        await presentPaywall({
+          onSuccess: () => {
+            router.replace("/(tabs)");
+          },
+          onDismiss: () => {
+            console.log(
+              "Onboarding: Paywall закрито, перехід на головний екран."
+            );
+            router.replace("/(tabs)");
+          },
+        });
       } catch (error) {
         console.error("Failed to save onboarding status", error);
       }

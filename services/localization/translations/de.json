@@ -91,7 +91,7 @@
   "settings_title": "Einstellungen",
 
   "preferences": "EINSTELLUNGEN",
-  "snap_tips_subtitle": "Kurztipps für beste Ergebnisse anzeigen",
+
   "language": "Sprache",
   "language_subtitle": "System (Deutsch)",
 
@@ -110,5 +110,17 @@
 
   "clear_cache_alert_title": "Cache leeren",
   "clear_cache_alert_message": "Möchten Sie den Anwendungscache wirklich leeren?",
-  "button_clear": "Leeren"
+  "button_clear": "Leeren",
+  "premium_activated": "Premium aktiviert",
+  "snap_tips_subtitle": "Schnelle Tipps für beste Ergebnisse",
+  "cache_cleared_successfully": "Cache erfolgreich gelöscht.",
+  "loading_location": "Standort wird geladen...",
+  "location_not_found": "Standort nicht gefunden",
+  "permission_denied": "Zugriff auf den Standort wurde verweigert",
+  "loading_styles": "Stile werden geladen...",
+  "choose_language": "Sprache wählen",
+  "error_could_not_load_landmark_data": "Fehler: Landmark-Daten konnten nicht geladen werden",
+  "identification_failed_title": "Konnte nicht identifiziert werden",
+  "identification_failed_message": "Dies scheint kein Wahrzeichen oder interessanter Ort zu sein. Bitte versuchen Sie ein anderes Foto.",
+  "success": "Erfolgreich"
 }
