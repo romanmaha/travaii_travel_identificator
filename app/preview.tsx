@@ -1,7 +1,8 @@
-import { ADMOB_INTERSTITIAL_ID, GOOGLE_GEMINI_API_KEY } from "@/constants";
+import { ADMOB_INTERSTITIAL_ID } from "@/constants";
 import { Colors } from "@/constants/Colors";
 import { usePremium } from "@/context/PremiumContext"; // ✅ 1. Імпортуємо хук
 import { getAnalyzeImagePrompt } from "@/helpers/analyzeImageWithGeminiPrompt";
+import { GOOGLE_GEMINI_API_KEY } from "@env";
 import * as FileSystem from "expo-file-system";
 import * as ImageManipulator from "expo-image-manipulator"; // ✅ 1. Імпортуємо маніпулятор
 import * as Location from "expo-location";
@@ -36,6 +37,8 @@ export default function PreviewScreen() {
   const { isLoaded, isClosed, load, show } = useInterstitialAd(
     ADMOB_INTERSTITIAL_ID
   );
+  const { isPremium } = usePremium();
+
   useEffect(() => {
     load();
   }, [load]);
@@ -68,7 +71,7 @@ export default function PreviewScreen() {
   useEffect(() => {
     if (landmarkResult) {
       // Якщо результат є, перевіряємо, чи завантажена реклама
-      if (isLoaded) {
+      if (isLoaded && !isPremium) {
         show(); // Показуємо рекламу
       } else {
         // Якщо реклама не завантажилась, переходимо одразу

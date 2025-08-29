@@ -1,6 +1,6 @@
-import { GOOGLE_GEMINI_API_KEY } from "@/constants";
 import { Colors } from "@/constants/Colors";
 import FormattedMessage from "@/helpers/formattedMessage";
+import { GOOGLE_GEMINI_API_KEY } from "@env";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";

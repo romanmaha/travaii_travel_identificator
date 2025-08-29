@@ -11,6 +11,7 @@
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
 		6480C1354D8340DDADA9767B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C16733EF92E94D4383FFE770 /* GoogleService-Info.plist */; };
 		7D64EE6ECE13DDAD0C0985BA /* Pods_Travaii.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA1FCFAC6517EC93B92DE2B /* Pods_Travaii.framework */; };
+		91DAF4F62E61FF1D00FB8F9E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91DAF4F52E61FF1D00FB8F9E /* StoreKit.framework */; };
 		A437BD696370CD58A4DB9782 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C7624D11F41476ADB210B /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 		D616692E7D52266A903A5EAE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 2C09D47FCA9137BA131F101A /* PrivacyInfo.xcprivacy */; };
@@ -22,9 +23,10 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Travaii/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Travaii/Info.plist; sourceTree = "<group>"; };
 		1EB04C41E15496B8C854AD92 /* Pods-Travaii.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Travaii.release.xcconfig"; path = "Target Support Files/Pods-Travaii/Pods-Travaii.release.xcconfig"; sourceTree = "<group>"; };
-		2C09D47FCA9137BA131F101A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = Travaii/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		2C09D47FCA9137BA131F101A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = Travaii/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		4A886331C92EA7320B4149B8 /* Pods-Travaii.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Travaii.debug.xcconfig"; path = "Target Support Files/Pods-Travaii/Pods-Travaii.debug.xcconfig"; sourceTree = "<group>"; };
 		6CA1FCFAC6517EC93B92DE2B /* Pods_Travaii.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Travaii.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		91DAF4F52E61FF1D00FB8F9E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = Travaii/SplashScreen.storyboard; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		C16733EF92E94D4383FFE770 /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Travaii/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -40,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D64EE6ECE13DDAD0C0985BA /* Pods_Travaii.framework in Frameworks */,
+				91DAF4F62E61FF1D00FB8F9E /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,7 +55,6 @@
 				4A886331C92EA7320B4149B8 /* Pods-Travaii.debug.xcconfig */,
 				1EB04C41E15496B8C854AD92 /* Pods-Travaii.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -74,6 +76,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				91DAF4F52E61FF1D00FB8F9E /* StoreKit.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				6CA1FCFAC6517EC93B92DE2B /* Pods_Travaii.framework */,
 			);
@@ -391,15 +394,19 @@
 			baseConfigurationReference = 4A886331C92EA7320B4149B8 /* Pods-Travaii.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Travaii/Travaii.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = KAMHKRWPJ4;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
 				);
 				INFOPLIST_FILE = Travaii/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Travaii;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -427,10 +434,14 @@
 			baseConfigurationReference = 1EB04C41E15496B8C854AD92 /* Pods-Travaii.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Travaii/Travaii.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = KAMHKRWPJ4;
 				INFOPLIST_FILE = Travaii/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Travaii;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -518,10 +529,7 @@
 				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -587,10 +595,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
