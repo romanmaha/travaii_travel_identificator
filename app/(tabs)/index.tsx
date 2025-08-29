@@ -13,13 +13,13 @@ import {
   View,
 } from "react-native";
 // Імпортуємо дані для популярних стилів
+import { ADMOB_BANNER_ID, ADMOB_INTERSTITIAL_ID } from "@/constants";
 import { Colors } from "@/constants/Colors"; // Імпортуємо ваші кольори
 import { usePremium } from "@/context/PremiumContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   BannerAd,
   BannerAdSize,
-  TestIds,
   useInterstitialAd,
 } from "react-native-google-mobile-ads";
 
@@ -67,7 +67,7 @@ type HistoryItem = {
 const StyleCard = React.memo(({ item }: { item: StyleItem }) => {
   const router = useRouter();
   const { isLoaded, isClosed, load, show } = useInterstitialAd(
-    TestIds.INTERSTITIAL,
+    ADMOB_INTERSTITIAL_ID,
     {
       requestNonPersonalizedAdsOnly: true,
     }
@@ -327,7 +327,7 @@ const HomeScreen = () => {
       </ScrollView>
       {!isPremium && (
         <BannerAd
-          unitId={TestIds.BANNER} // Замініть на ваш реальний ID рекламного блоку
+          unitId={ADMOB_BANNER_ID} // Замініть на ваш реальний ID рекламного блоку
           size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
           requestOptions={{
             networkExtras: {

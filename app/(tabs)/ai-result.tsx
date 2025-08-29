@@ -1,3 +1,4 @@
+import { ADMOB_BANNER_ID } from "@/constants";
 import { Colors } from "@/constants/Colors";
 import { usePremium } from "@/context/PremiumContext"; // ✅ 1. Імпортуємо хук
 import { usePaywall } from "@/hooks/usePaywall";
@@ -19,11 +20,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import {
-  BannerAd,
-  BannerAdSize,
-  TestIds,
-} from "react-native-google-mobile-ads";
+import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 
 // Тип для даних, що приходять від Gemini
 type LandmarkData = {
@@ -409,7 +406,7 @@ export default function AiResultScreen() {
                   justifyContent: "center",
                 }}>
                 <BannerAd
-                  unitId={TestIds.BANNER} // Замініть на ваш реальний ID рекламного блоку
+                  unitId={ADMOB_BANNER_ID} // Замініть на ваш реальний ID рекламного блоку
                   size={BannerAdSize.INLINE_ADAPTIVE_BANNER}
                   requestOptions={{
                     networkExtras: {

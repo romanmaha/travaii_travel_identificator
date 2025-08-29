@@ -1,4 +1,4 @@
-import { GOOGLE_GEMINI_API_KEY } from "@/constants";
+import { ADMOB_INTERSTITIAL_ID, GOOGLE_GEMINI_API_KEY } from "@/constants";
 import { Colors } from "@/constants/Colors";
 import { usePremium } from "@/context/PremiumContext"; // ✅ 1. Імпортуємо хук
 import { getAnalyzeImagePrompt } from "@/helpers/analyzeImageWithGeminiPrompt";
@@ -19,7 +19,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { TestIds, useInterstitialAd } from "react-native-google-mobile-ads";
+import { useInterstitialAd } from "react-native-google-mobile-ads";
 
 const MAX_RETRIES = 3;
 
@@ -34,7 +34,7 @@ export default function PreviewScreen() {
   );
   const [landmarkResult, setLandmarkResult] = useState<any | null>(null);
   const { isLoaded, isClosed, load, show } = useInterstitialAd(
-    TestIds.INTERSTITIAL
+    ADMOB_INTERSTITIAL_ID
   );
   useEffect(() => {
     load();
